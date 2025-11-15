@@ -1,0 +1,38 @@
+---
+# common: install docker & docker-compose (simple)
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install packages for docker
+  apt:
+    name: ['apt-transport-https','ca-certificates','curl','gnupg','lsb-release','python3-pip']
+    state: present
+
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repo
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install docker engine and docker-compose
+  apt:
+    name: ['docker-ce','docker-ce-cli','containerd.io']
+    state: present
+    update_cache: yes
+
+- name: Ensure pip is present
+  pip:
+    name: docker-compose
+    state: present
+
+- name: Add user to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes

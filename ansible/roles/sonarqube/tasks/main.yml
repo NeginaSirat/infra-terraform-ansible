@@ -1,0 +1,20 @@
+---
+# Run SonarQube in Docker (requires sufficient memory)
+- name: Create sonarqube data dir
+  file:
+    path: /opt/sonarqube
+    state: directory
+    owner: "{{ ansible_user }}"
+
+- name: Run SonarQube container
+  community.docker.docker_container:
+    name: sonarqube
+    image: sonarqube:lts
+    state: started
+    restart_policy: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - /opt/sonarqube:/opt/sonarqube/data
+    env:
+      SONAR_JDBC_URL: "jdbc:postgresql://db:5432/sonar"

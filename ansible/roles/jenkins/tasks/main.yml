@@ -1,0 +1,19 @@
+---
+# Run Jenkins in Docker
+- name: Create jenkins data dir
+  file:
+    path: /opt/jenkins
+    state: directory
+    owner: "{{ ansible_user }}"
+
+- name: Run Jenkins container
+  community.docker.docker_container:
+    name: jenkins
+    image: jenkins/jenkins:lts
+    state: started
+    restart_policy: always
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /opt/jenkins:/var/jenkins_home
