@@ -2,8 +2,6 @@
 
 This repository contains example Terraform and Ansible configuration to provision an AWS VPC + EC2 instance(s), and to deploy Jenkins, Nexus, and SonarQube using Ansible (Docker containers). It also contains an optional Jenkins -> EKS pipeline example.
 
-> **Important:** This is a template. You must provide AWS credentials and adjust variables before running. I did not deploy resources here — follow the step-by-step guide below to run in your own AWS account.
-
 ---
 ## Repo layout
 ```
@@ -25,13 +23,81 @@ k8s/
   └─ service.yaml
 Jenkinsfile
 README.md
-```
 
----
+```
+## This repository provides a fully automated Infrastructure-as-Code (IaC) setup to deploy a complete DevSecOps CI/CD environment using:
+
+.  Terraform – Infrastructure provisioning
+
+.  Ansible – Configuration management & tool installation
+
+.  AWS – VPC, EC2, EKS
+
+.  Docker – Nexus & SonarQube containers
+
+.  Kubernetes (EKS) – for application deployment
+
+### This project deploys and configures the following DevSecOps tools:
+
+.  Jenkins (Port 8080)
+
+.  Nexus Repository Manager (Port 8081)
+
+.  SonarQube (Port 9000)
+
+
+
 ## Quick step-by-step execution guide
 
-1. **Prepare AWS credentials** (environment variables or shared credentials file).
+**Prepare AWS credentials** (environment variables or shared credentials file).
    - `export AWS_PROFILE=yourprofile` or `export AWS_ACCESS_KEY_ID=...` and `export AWS_SECRET_ACCESS_KEY=...`
+
+  # 💻 Install AWS CLI on Windows
+
+
+  ```
+   # 📦 Step 1: Download the latest AWS CLI v2 Installer (64-bit)
+     Invoke-WebRequest -Uri "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
+ 
+   # 🧩 Step 2: Run the installer
+     Start-Process msiexec.exe -Wait -ArgumentList '/i AWSCLIV2.msi /qn'
+
+   # 🧹 Step 3: Clean up the installer
+       Remove-Item "AWSCLIV2.msi"
+
+   # ✅ Step 4: Verify installation
+       aws --version
+  ```
+
+   Once aws is installed provide your credentials to authenticate by using :
+   ```
+   aws configure
+
+   ```
+
+
+
+# Install and configure Infrastructure Provisioning (Terraform)
+
+ 1.**Install Terraform on Windows**:
+    * Download Terraform ZIP: https://developer.hashicorp.com/terraform/downloads
+    
+  * Extract terraform.exe.
+  
+ * Move it to: C:\terraform\
+
+
+* Add folder to PATH:
+
+  Control Panel → System → Advanced System Settings
+  Environment Variables
+  Edit PATH → Add:
+
+
+  **Verify installation**
+   ```
+  terraform -version
+   ```
 
 2. **Terraform (create infra)**:
    ```bash
