@@ -103,7 +103,7 @@ README.md
    * Create and enter the project directory
    ```
    ### 💻 Windows PowerShell
-   touch main.tf vpc.tf variables.tf outputs.tf
+   New-Item main.tf, provider.tf, variables.tf, outputs.tf, ec2.tf
    ```
 
   * Add the basic configuration in the files (you can find the files in the terraform folder)
