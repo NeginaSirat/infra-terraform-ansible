@@ -79,7 +79,7 @@ README.md
 
 # Install and configure Infrastructure Provisioning (Terraform)
 
- 1.**Install Terraform on Windows**:
+ 1. **Install Terraform on Windows**:
     * Download Terraform ZIP: https://developer.hashicorp.com/terraform/downloads
     
   * Extract terraform.exe.
@@ -100,12 +100,21 @@ README.md
    ```
 
 2. **Terraform (create infra)**:
-   ```bash
-   cd terraform
-   terraform init
-   terraform plan -out plan.tf
-   terraform apply "plan.tf"
+   * Create and enter the project directory
    ```
+   ### 💻 Windows PowerShell
+   touch main.tf vpc.tf variables.tf outputs.tf
+   ```
+
+  * Add the basic configuration in the files (you can find the files in the terraform folder)
+  * Initialize and deploy terraform
+
+    ```bash
+    cd terraform
+    terraform init
+    terraform plan -out plan.tf
+    terraform apply "plan.tf"
+    ```
    - After apply you'll see outputs with EC2 public IP(s) and (optionally) EKS info.
    - Note: `eks.tf` is optional. If you want EKS, uncomment the module and configure values.
 
