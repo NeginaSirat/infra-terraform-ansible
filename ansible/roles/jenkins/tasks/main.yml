@@ -1,19 +1,22 @@
----
-# Run Jenkins in Docker
-- name: Create jenkins data dir
-  file:
-    path: /opt/jenkins
-    state: directory
-    owner: "{{ ansible_user }}"
+- name: Add Jenkins GPG key
+  ansible.builtin.get_url:
+    url: https://pkg.jenkins.io/debian/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+    mode: '0644'
 
-- name: Run Jenkins container
-  community.docker.docker_container:
+- name: Add Jenkins repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian stable main"
+    state: present
+
+- name: Install Jenkins
+  ansible.builtin.apt:
     name: jenkins
-    image: jenkins/jenkins:lts
+    state: present
+    update_cache: yes
+
+- name: Start and enable Jenkins
+  ansible.builtin.systemd:
+    name: jenkins
+    enabled: yes
     state: started
-    restart_policy: always
-    ports:
-      - "8080:8080"
-      - "50000:50000"
-    volumes:
-      - /opt/jenkins:/var/jenkins_home
