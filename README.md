@@ -115,7 +115,10 @@ README.md
    - After apply you'll see outputs with EC2 public IP(s) and (optionally) EKS info.
 
 
-3. **Install Ansible on Windows using WSL (Ubuntu)**:
+# Install and configure Ansible :
+
+1. **Install Ansible on Windows using WSL (Ubuntu)**
+   
   Open PowerShell as Administrator:
    ```
    wsl --install
@@ -144,7 +147,24 @@ README.md
   ```
 
 **🎉 Now Ansible is installed and ready to run your playbooks.**
+
+
+   2.** Configure Ansible to install tools on EC2 instances**
+
+   * Create your Ansible project folder
+  ```
+  mkdir -p ~/devsecops/ansible
+  cd ~/devsecops/ansible
+ ```
+
+  * Create Ansible inventory
+ ```
+ nano inventory.ini
+ ```
+ 
+
    
+   4. Create your Ansible project folder
    - Copy `ansible/inventory.ini.example` to `ansible/inventory.ini` (or update `ansible/inventory.ini`) and place the public IP(s) from Terraform outputs.
 
 5. **Run Ansible to deploy apps (runs Docker containers)**:
