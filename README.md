@@ -1,6 +1,6 @@
 # Infra Repo (Terraform + Ansible) - Sample Submission
 
-This repository contains example Terraform and Ansible configuration to provision an AWS VPC + EC2 instance(s), and to deploy Jenkins, Nexus, and SonarQube using Ansible (Docker containers). It also contains an optional Jenkins -> EKS pipeline example.
+This repository contains example Terraform and Ansible configuration to provision an AWS VPC + EC2 instance(s), and to deploy Jenkins, Nexus, and SonarQube using Ansible (Docker containers).
 
 ---
 ## Repo layout
@@ -18,10 +18,7 @@ ansible/
       ├─ jenkins/
       ├─ nexus/
       └─ sonarqube/
-k8s/
-  ├─ deployment.yaml
-  └─ service.yaml
-Jenkinsfile
+
 README.md
 
 ```
@@ -116,12 +113,41 @@ README.md
     terraform apply "plan.tf"
     ```
    - After apply you'll see outputs with EC2 public IP(s) and (optionally) EKS info.
-   - Note: `eks.tf` is optional. If you want EKS, uncomment the module and configure values.
 
-3. **Update Ansible inventory**:
+
+3. **Install Ansible on Windows using WSL (Ubuntu)**:
+  Open PowerShell as Administrator:
+   ```
+   wsl --install
+
+   ```
+
+ This installs Ubuntu automatically.
+
+  Reboot your computer.
+
+   * Open Ubuntu and update it
+
+   ```
+   sudo apt update
+   sudo apt upgrade -y
+   ```
+
+   * Install Ansible
+   ```
+   sudo apt install ansible -y
+   ```
+
+  Check version:
+  ```
+  ansible --version
+  ```
+
+**🎉 Now Ansible is installed and ready to run your playbooks.**
+   
    - Copy `ansible/inventory.ini.example` to `ansible/inventory.ini` (or update `ansible/inventory.ini`) and place the public IP(s) from Terraform outputs.
 
-4. **Run Ansible to deploy apps (runs Docker containers)**:
+5. **Run Ansible to deploy apps (runs Docker containers)**:
    ```bash
    cd ansible
    ansible-galaxy install -r requirements.yml  # optional if you use galaxy roles
@@ -129,16 +155,16 @@ README.md
    ```
    - This will run `common` role (installs Docker) and per-app roles to run containers for Jenkins, Nexus, SonarQube.
 
-5. **Access dashboards**:
+6. **Access dashboards**:
    - Jenkins: `http://<jenkins_ip>:8080`
    - Nexus: `http://<nexus_ip>:8081`
    - SonarQube: `http://<sonarqube_ip>:9000`
 
-6. **kubectl (if you created EKS)**:
+7. **kubectl (if you created EKS)**:
    - Update kubeconfig: `aws eks --region <region> update-kubeconfig --name <cluster-name>`
    - Check nodes: `kubectl get nodes`
 
-7. **Bonus — Jenkins pipeline to deploy to EKS**:
+8. **Bonus — Jenkins pipeline to deploy to EKS**:
    - `Jenkinsfile` provided demonstrates building a sample container image and applying `k8s/` manifests to the cluster (requires Jenkins credentials + kubeconfig/configured `kubectl`).
 
 ---
