@@ -1,11 +1,16 @@
----
+  GNU nano 7.2                                                                          jenkins/tasks/main.yml                                                                                    ---
+- name: Install Java 17
+  apt:
+    name: openjdk-17-jdk
+    state: present
+    update_cache: yes
+
 - name: Install required packages
   apt:
     name:
       - gnupg
       - ca-certificates
     state: present
-    update_cache: yes
 
 - name: Add Jenkins GPG key
   ansible.builtin.get_url:
@@ -18,15 +23,3 @@
     repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
     state: present
     filename: jenkins
-
-- name: Install Jenkins
-  ansible.builtin.apt:
-    name: jenkins
-    state: latest
-    update_cache: yes
-
-- name: Start and enable Jenkins service
-  ansible.builtin.systemd:
-    name: jenkins
-    enabled: yes
-    state: started
