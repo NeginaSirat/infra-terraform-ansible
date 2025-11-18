@@ -199,7 +199,7 @@ Place screenshots here (replace placeholders in this README with real images aft
 - (Jenkins dashboard)  https://github.com/NeginaSirat/infra-terraform-ansible/issues/1 
 -  (Nexus dashboard) https://github.com/NeginaSirat/infra-terraform-ansible/issues/2
 - (SonarQube dashboard) https://github.com/NeginaSirat/infra-terraform-ansible/issues/3
-- `screenshots/kubectl_nodes.png` (kubectl get nodes)
+  
 
 ---
 ## Notes & Security
