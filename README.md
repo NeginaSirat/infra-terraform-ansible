@@ -158,39 +158,45 @@ README.md
  ```
 
   * Create Ansible inventory
+    
  ```
  nano inventory.ini
  ```
  
+ place the public IP(s) from Terraform outputs.
 
-   
-   4. Create your Ansible project folder
-   - Copy `ansible/inventory.ini.example` to `ansible/inventory.ini` (or update `ansible/inventory.ini`) and place the public IP(s) from Terraform outputs.
+5. create all the roles for Jenkins, Nexus , and sonarqube
+  ```
+  nano roles/jenkins/tasks/main.yml
+  nano roles/nexus/tasks/main.yml
+  nano roles/sonarqube/tasks/main.yml
+  ```
 
-5. **Run Ansible to deploy apps (runs Docker containers)**:
-   ```bash
-   cd ansible
-   ansible-galaxy install -r requirements.yml  # optional if you use galaxy roles
-   ansible-playbook -i inventory.ini site.yml --ask-become-pass
-   ```
-   - This will run `common` role (installs Docker) and per-app roles to run containers for Jenkins, Nexus, SonarQube.
+ Paste the contents from the NeginaSirat/infra-terraform-ansibleansible/roles for each role’s section.
 
-6. **Access dashboards**:
+6. * Create your main playbook (site.yml)
+
+  ```
+  nano site.yml
+  ```
+paste the site.yml content to this file
+
+7. * Run your playbook
+  ```
+ ansible-playbook -i inventory.ini site.yml
+  ```
+
+
+8. **Access dashboards**:
    - Jenkins: `http://<jenkins_ip>:8080`
    - Nexus: `http://<nexus_ip>:8081`
    - SonarQube: `http://<sonarqube_ip>:9000`
 
-7. **kubectl (if you created EKS)**:
-   - Update kubeconfig: `aws eks --region <region> update-kubeconfig --name <cluster-name>`
-   - Check nodes: `kubectl get nodes`
-
-8. **Bonus — Jenkins pipeline to deploy to EKS**:
-   - `Jenkinsfile` provided demonstrates building a sample container image and applying `k8s/` manifests to the cluster (requires Jenkins credentials + kubeconfig/configured `kubectl`).
 
 ---
 ## Screenshots
 Place screenshots here (replace placeholders in this README with real images after you deploy):
-- `screenshots/jenkins.png` (Jenkins dashboard)
+- `screenshots/jenkins.` (Jenkins dashboard)
 - `screenshots/nexus.png` (Nexus dashboard)
 - `screenshots/sonarqube.png` (SonarQube dashboard)
 - `screenshots/kubectl_nodes.png` (kubectl get nodes)
