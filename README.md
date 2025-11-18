@@ -197,8 +197,8 @@ paste the site.yml content to this file
 ## Screenshots
 Place screenshots here (replace placeholders in this README with real images after you deploy):
 - (Jenkins dashboard)  https://github.com/NeginaSirat/infra-terraform-ansible/issues/1 
-- `screenshots/nexus.png` (Nexus dashboard)
-- `screenshots/sonarqube.png` (SonarQube dashboard)
+-  (Nexus dashboard) https://github.com/NeginaSirat/infra-terraform-ansible/issues/2
+- (SonarQube dashboard) https://github.com/NeginaSirat/infra-terraform-ansible/issues/3
 - `screenshots/kubectl_nodes.png` (kubectl get nodes)
 
 ---
