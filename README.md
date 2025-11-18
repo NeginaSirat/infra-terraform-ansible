@@ -196,7 +196,7 @@ paste the site.yml content to this file
 ---
 ## Screenshots
 Place screenshots here (replace placeholders in this README with real images after you deploy):
-- `screenshots/jenkins.` (Jenkins dashboard)
+- `![Image](https://github.com/user-attachments/assets/4cc67c19-a9f2-4022-a55f-3e434a7359fb)` (Jenkins dashboard)
 - `screenshots/nexus.png` (Nexus dashboard)
 - `screenshots/sonarqube.png` (SonarQube dashboard)
 - `screenshots/kubectl_nodes.png` (kubectl get nodes)
